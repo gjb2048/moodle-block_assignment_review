@@ -23,6 +23,8 @@
  * @author     Jerome Mouneyrac <jerome@mouneyrac.com>
  */
 
+require_once($CFG->dirroot . '/comment/lib.php');
+
 /**
  * assignment_review block.
  *
@@ -47,13 +49,22 @@ class block_assignment_review extends block_base {
      * @return stdClass The block contents.
      */
     public function get_content() {
-        global $COURSE, $DB, $PAGE;
+        global $PAGE, $COURSE, $CFG;
 
         if (!has_capability('block/assignment_review:view', $PAGE->context)) {
             return $this->content;
         }
 
         if ($this->content !== null) {
+            return $this->content;
+        }
+
+        if (!$CFG->usecomments) {
+            $this->content = new stdClass();
+            $this->content->text = '';
+            if ($this->page->user_is_editing()) {
+                $this->content->text = get_string('disabledcomments');
+            }
             return $this->content;
         }
 
@@ -73,9 +84,23 @@ class block_assignment_review extends block_base {
             $desc = $this->config->description['text'];
         }
 
-        $text = $desc;
+        $this->content->text = $desc;
 
-        $this->content->text = $text;
+        // Add comment api
+        $args = new stdClass;
+        $args->context   = $PAGE->context;
+        $args->course    = $COURSE;
+        $args->area      = 'page_comments';
+        $args->itemid    = 0;
+        $args->component = 'block_assignment_review';
+        $args->linktext  = get_string('showcomments');
+        $args->notoggle  = true;
+        $args->autostart = true;
+        $args->displaycancel = false;
+        $comment = new comment($args);
+        $comment->set_view_permission(true);
+        $comment->set_fullwidth();
+        $this->content->text .= $comment->output(true);
 
         return $this->content;
     }
