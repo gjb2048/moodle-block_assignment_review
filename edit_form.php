@@ -44,6 +44,10 @@ class block_assignment_review_edit_form extends block_edit_form {
         $mform->addElement('text', 'config_title', get_string('configtitle', 'block_assignment_review'));
         $mform->setType('config_title', PARAM_TEXT);
 
+        $mform->addElement('editor', 'config_description',
+            get_string('configdescription', 'block_assignment_review'), array('rows' => 4));
+        $mform->setType('config_description', PARAM_RAW);
+
         // Please keep in mind that all elements defined here must start with 'config_'.
 
     }

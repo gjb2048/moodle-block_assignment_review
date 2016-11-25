@@ -26,8 +26,31 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
-    $settings->add(new admin_setting_configtext('blockassignmentmarkershortname1', get_string('markershortname1', 'block_assignment_review'),
-        get_string('markershortname1desc', 'block_assignment_review'), '', PARAM_ALPHANUM));
-    $settings->add(new admin_setting_configtext('blockassignmentmarkertext1', get_string('markertext1', 'block_assignment_review'),
-        get_string('markertext1desc', 'block_assignment_review'), '', PARAM_ALPHANUM));
+
+    $settings->add(new admin_setting_heading('blockassignmentmarkers',
+        new lang_string('blockassignmentmarkers', 'block_assignment_review'),
+        new lang_string('blockassignmentmarkersdesc', 'block_assignment_review'), ''));
+
+    for ($i=0; $i<5; $i++) {
+        $settings->add(new admin_setting_configtext('blockassignmentmarkershortname'.$i, get_string('markershortname', 'block_assignment_review'),
+            get_string('markershortnamedesc', 'block_assignment_review'), '', PARAM_ALPHANUM));
+        $settings->add(new admin_setting_configtext('blockassignmentmarkertext'.$i, get_string('markertext', 'block_assignment_review'),
+            get_string('markertextdesc', 'block_assignment_review'), '', PARAM_ALPHANUM));
+
+        $settings->add(new admin_setting_heading('blockassignmentmarker'.$i, '', '<br/>', ''));
+    }
+
+    $settings->add(new admin_setting_heading('blockassignmentissues',
+        new lang_string('blockassignmentissues', 'block_assignment_review'),
+        new lang_string('blockassignmentissuesdesc', 'block_assignment_review'), ''));
+
+    for ($i=0; $i<5; $i++) {
+        $settings->add(new admin_setting_configtext('blockassignmentissueshortname'.$i, get_string('issueshortname', 'block_assignment_review'),
+            get_string('issueshortnamedesc', 'block_assignment_review'), '', PARAM_ALPHANUM));
+        $settings->add(new admin_setting_configtext('blockassignmentissuetext'.$i, get_string('issuetext', 'block_assignment_review'),
+            get_string('issuetextdesc', 'block_assignment_review'), '', PARAM_ALPHANUM));
+
+        $settings->add(new admin_setting_heading('blockassignmentissue'.$i, '', '<br/>', ''));
+    }
+
 }

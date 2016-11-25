@@ -67,8 +67,13 @@ class block_assignment_review extends block_base {
         $this->content->icons = array();
         $this->content->footer = '';
 
+        if (empty($this->config->description['text'])) {
+            $desc = '';
+        } else {
+            $desc = $this->config->description['text'];
+        }
 
-        $text = 'TODO / COMMENTS';
+        $text = $desc;
 
         $this->content->text = $text;
 

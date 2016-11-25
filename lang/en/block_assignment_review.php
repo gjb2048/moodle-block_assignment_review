@@ -27,7 +27,19 @@
 defined('MOODLE_INTERNAL') || die();
 
 
+$string['blockassignmentissues'] = 'Issues';
+$string['blockassignmentissuesdesc'] = 'Type of issues of the comments.';
+$string['blockassignmentmarkers'] = 'Markers';
+$string['blockassignmentmarkersdesc'] = '';
+$string['configdescription'] = 'Description';
 $string['configtitle'] = 'Title';
-$string['description'] = 'Description';
 $string['assignment_review:view'] = 'Can view the assignment review comments';
+$string['issueshortname'] = 'Issue short name';
+$string['issueshortnamedesc'] = 'the issue shortname is displayed on each comment and it can used by configurable reports.';
+$string['issuetext'] = 'Issue';
+$string['issuetextdesc'] = 'explicit issue description';
+$string['markershortname'] = 'Marker short name';
+$string['markershortnamedesc'] = 'the marker shortname is displayed on each comment and it can used by configurable reports.';
+$string['markertext'] = 'Marker';
+$string['markertextdesc'] = 'explicit marker description';
 $string['pluginname'] = 'Assignment Review';
