@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="blocks/assignment_review/db" VERSION="20161113" COMMENT="XMLDB file for Moodle blocks/assignment_review"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
->
-  <TABLES>
-
-  </TABLES>
-</XMLDB>
