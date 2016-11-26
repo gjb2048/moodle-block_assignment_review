@@ -24,6 +24,7 @@
  */
 
 require_once($CFG->dirroot . '/comment/lib.php');
+require_once($CFG->dirroot . '/blocks/assignment_review/lib.php');
 
 /**
  * assignment_review block.
@@ -84,9 +85,28 @@ class block_assignment_review extends block_base {
             $desc = $this->config->description['text'];
         }
 
+        // Description
         $this->content->text = $desc;
 
-        // Add comment api
+        // Markers
+        if (empty($CFG->blockassignmentmarkertotal)) {
+            $markertotal = DEFAULT_NUMBER_OF_MARKERS;
+        } else {
+            $markertotal = $CFG->blockassignmentmarkertotal;
+        }
+        $this->content->text .= '<form id="block_assignment_review_markers" class="block_assignment_review_markers" action="">';
+        for ($i = 0; $i < $markertotal; $i++) {
+            $configname = 'blockassignmentmarkertext' . $i;
+            if (!empty($CFG->{$configname})) {
+                $this->content->text .=
+                    '<input type="radio" name="blockassignmentmarkershortname" 
+                    value="blockassignmentmarkershortname' . $i . ' "> ' . $CFG->{$configname} . '</input><br/>';
+            }
+        }
+        $this->content->text .= '</form>';
+
+
+        // Comments
         $args = new stdClass;
         $args->context   = $PAGE->context;
         $args->course    = $COURSE;
@@ -101,6 +121,23 @@ class block_assignment_review extends block_base {
         $comment->set_view_permission(true);
         $comment->set_fullwidth();
         $this->content->text .= $comment->output(true);
+
+        // Issues
+        if (empty($CFG->blockassignmentissuetotal)) {
+            $issuetotal = DEFAULT_NUMBER_OF_MARKERS;
+        } else {
+            $issuetotal = $CFG->blockassignmentissuetotal;
+        }
+        $this->content->text .= '<form id="block_assignment_review_issues" class="block_assignment_review_issues" action="">';
+        for ($i = 0; $i < $issuetotal; $i++) {
+            $configname = 'blockassignmentissuetext' . $i;
+            if (!empty($CFG->{$configname})) {
+                $this->content->text .=
+                    '<input type="checkbox" name="blockassignmentissueshortname"' . $i . ' 
+                    value="blockassignmentissueshortname' . $i . ' "> ' . $CFG->{$configname} . '</input><br/>';
+            }
+        }
+        $this->content->text .= '</form>';
 
         return $this->content;
     }

@@ -23,6 +23,8 @@
  * @author     Jerome Mouneyrac <jerome@mouneyrac.com>
  */
 
+define('DEFAULT_NUMBER_OF_MARKERS', 4);
+
 /**
  * Serve the block files.
  *

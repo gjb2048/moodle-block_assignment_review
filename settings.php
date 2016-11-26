@@ -25,17 +25,28 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+require_once($CFG->dirroot . '/blocks/assignment_review/lib.php');
+
 if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_heading('blockassignmentmarkers',
         new lang_string('blockassignmentmarkers', 'block_assignment_review'),
         new lang_string('blockassignmentmarkersdesc', 'block_assignment_review'), ''));
 
-    for ($i=0; $i<5; $i++) {
+    $settings->add(new admin_setting_configtext('blockassignmentmarkertotal', get_string('markertotal', 'block_assignment_review'),
+        get_string('markertotaldesc', 'block_assignment_review'), DEFAULT_NUMBER_OF_MARKERS, PARAM_INT));
+
+    if (empty($CFG->blockassignmentmarkertotal)) {
+        $markertotal = DEFAULT_NUMBER_OF_MARKERS;
+    } else {
+        $markertotal = $CFG->blockassignmentmarkertotal;
+    }
+
+    for ($i=0; $i < $markertotal; $i++) {
         $settings->add(new admin_setting_configtext('blockassignmentmarkershortname'.$i, get_string('markershortname', 'block_assignment_review'),
-            get_string('markershortnamedesc', 'block_assignment_review'), '', PARAM_ALPHANUM));
+            get_string('markershortnamedesc', 'block_assignment_review'), '', PARAM_TEXT));
         $settings->add(new admin_setting_configtext('blockassignmentmarkertext'.$i, get_string('markertext', 'block_assignment_review'),
-            get_string('markertextdesc', 'block_assignment_review'), '', PARAM_ALPHANUM));
+            get_string('markertextdesc', 'block_assignment_review'), '', PARAM_TEXT));
 
         $settings->add(new admin_setting_heading('blockassignmentmarker'.$i, '', '<br/>', ''));
     }
@@ -44,11 +55,20 @@ if ($ADMIN->fulltree) {
         new lang_string('blockassignmentissues', 'block_assignment_review'),
         new lang_string('blockassignmentissuesdesc', 'block_assignment_review'), ''));
 
-    for ($i=0; $i<5; $i++) {
+    $settings->add(new admin_setting_configtext('blockassignmentissuetotal', get_string('issuetotal', 'block_assignment_review'),
+        get_string('issuetotaldesc', 'block_assignment_review'), DEFAULT_NUMBER_OF_MARKERS, PARAM_INT));
+
+    if (empty($CFG->blockassignmentissuetotal)) {
+        $issuetotal = DEFAULT_NUMBER_OF_MARKERS;
+    } else {
+        $issuetotal = $CFG->blockassignmentissuetotal;
+    }
+
+    for ($i=0; $i < $issuetotal; $i++) {
         $settings->add(new admin_setting_configtext('blockassignmentissueshortname'.$i, get_string('issueshortname', 'block_assignment_review'),
-            get_string('issueshortnamedesc', 'block_assignment_review'), '', PARAM_ALPHANUM));
+            get_string('issueshortnamedesc', 'block_assignment_review'), '', PARAM_TEXT));
         $settings->add(new admin_setting_configtext('blockassignmentissuetext'.$i, get_string('issuetext', 'block_assignment_review'),
-            get_string('issuetextdesc', 'block_assignment_review'), '', PARAM_ALPHANUM));
+            get_string('issuetextdesc', 'block_assignment_review'), '', PARAM_TEXT));
 
         $settings->add(new admin_setting_heading('blockassignmentissue'.$i, '', '<br/>', ''));
     }
