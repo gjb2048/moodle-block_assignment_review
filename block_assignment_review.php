@@ -52,6 +52,8 @@ class block_assignment_review extends block_base {
     public function get_content() {
         global $PAGE, $COURSE, $CFG;
 
+
+
         if (!has_capability('block/assignment_review:view', $PAGE->context)) {
             return $this->content;
         }
@@ -89,6 +91,10 @@ class block_assignment_review extends block_base {
         $this->content->text = $desc;
 
         // Markers
+        $usermarker = get_user_preferences('block_assignment_review_marker');
+        if (empty($usermarker)) {
+            $usermarker = '';
+        }
         if (empty($CFG->blockassignmentmarkertotal)) {
             $markertotal = DEFAULT_NUMBER_OF_MARKERS;
         } else {
@@ -96,17 +102,36 @@ class block_assignment_review extends block_base {
         }
         $this->content->text .= '<form id="block_assignment_review_markers" class="block_assignment_review_markers" action="">';
         for ($i = 0; $i < $markertotal; $i++) {
+
             $configname = 'blockassignmentmarkertext' . $i;
-            if (!empty($CFG->{$configname})) {
+            $configshortname = 'blockassignmentmarkershortname' . $i;
+            if (!empty($CFG->{$configname}) && !empty($CFG->{$configshortname})) {
+
+                $selected = '';
+                if (empty($selected) &&
+                    ($usermarker === $CFG->{$configshortname} || $i === $markertotal - 1)) {
+                    $selected = "checked=\"checked\"";
+                }
+
                 $this->content->text .=
-                    '<input type="radio" name="blockassignmentmarkershortname" 
-                    value="blockassignmentmarkershortname' . $i . ' "> ' . $CFG->{$configname} . '</input><br/>';
+                    '<input type="radio" name="blockassignmentmarker" 
+                    value="'.$CFG->{$configshortname}.'" '.$selected.'> ' . $CFG->{$configname} . '</input><br/>';
             }
         }
         $this->content->text .= '</form>';
 
 
         // Comments
+        $PAGE->requires->strings_for_js(
+            array(
+            'addcomment',
+            'comments',
+            'commentscount',
+            'commentsrequirelogin',
+            'deletecomment',
+            ),
+            'moodle'
+        );
         $args = new stdClass;
         $args->context   = $PAGE->context;
         $args->course    = $COURSE;
@@ -131,13 +156,18 @@ class block_assignment_review extends block_base {
         $this->content->text .= '<form id="block_assignment_review_issues" class="block_assignment_review_issues" action="">';
         for ($i = 0; $i < $issuetotal; $i++) {
             $configname = 'blockassignmentissuetext' . $i;
+            $configshortname = 'blockassignmentissueshortname' . $i;
             if (!empty($CFG->{$configname})) {
                 $this->content->text .=
-                    '<input type="checkbox" name="blockassignmentissueshortname"' . $i . ' 
-                    value="blockassignmentissueshortname' . $i . ' "> ' . $CFG->{$configname} . '</input><br/>';
+                    '<input type="checkbox" name="blockassignmentissues" 
+                    value="'.$CFG->{$configshortname}.'"> ' . $CFG->{$configname} . '</input><br/>';
             }
         }
         $this->content->text .= '</form>';
+
+        // Load jquery.
+        $PAGE->requires->jquery();
+        $PAGE->requires->js('/blocks/assignment_review/script.js');
 
         return $this->content;
     }
