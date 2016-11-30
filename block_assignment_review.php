@@ -107,15 +107,15 @@ class block_assignment_review extends block_base {
             $configshortname = 'blockassignmentmarkershortname' . $i;
             if (!empty($CFG->{$configname}) && !empty($CFG->{$configshortname})) {
 
-                $selected = '';
-                if (empty($selected) &&
-                    ($usermarker === $CFG->{$configshortname} || $i === $markertotal - 1)) {
-                    $selected = "checked=\"checked\"";
-                }
+//                $selected = '';
+//                if (empty($selected) &&
+//                    ($usermarker === $CFG->{$configshortname} || $i === $markertotal - 1)) {
+//                    $selected = "checked=\"checked\"";
+//                }
 
                 $this->content->text .=
                     '<input type="radio" name="blockassignmentmarker" 
-                    value="'.$CFG->{$configshortname}.'" '.$selected.'> ' . $CFG->{$configname} . '</input><br/>';
+                        value="'.$CFG->{$configshortname}.'" > ' . $CFG->{$configname} . '</input><br/>';
             }
         }
         $this->content->text .= '</form>';

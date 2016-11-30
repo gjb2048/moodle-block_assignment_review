@@ -34,7 +34,9 @@ window.onload = function() {
 
 
             // Retrieve the selected choice of marker.
-            var selectedmarker = $('input[name=blockassignmentmarker]:checked').val() + ' | ';
+            var themarker = $('input[name=blockassignmentmarker]:checked').val();
+            var selectedmarker = themarker + ' | ';
+            localStorage.setItem('block_assignment_review_marker', themarker);
 
             //Retrieve the issues.
             var selectedissues = '';
@@ -58,4 +60,15 @@ window.onload = function() {
             $('#block_assignment_review_savecomment').css('visibility', 'visible');
         }
     );
+
+    // Select the default marker.
+    var marker = localStorage.getItem('block_assignment_review_marker');
+    if (marker !== null) {
+        $("input[name=blockassignmentmarker][value='"+marker+"']").prop("checked",true);
+    } else {
+        // Default to first radio button if nothing were ever selected.
+        $("input[name=blockassignmentmarker]:first").prop('checked', true);
+    }
+
+
 }
