@@ -35,6 +35,7 @@ $string['blockassignmentmarkersdesc'] = 'These markers would be radio buttons. T
 For example you could have: "I am a first grader", "I am an external reviewer"...';
 $string['configdescription'] = 'Description';
 $string['configtitle'] = 'Title';
+$string['assignment_review:delete'] = 'Can delete other people assignment review comments';
 $string['assignment_review:view'] = 'Can view the assignment review comments';
 $string['issueshortname'] = 'Issue short name';
 $string['issueshortnamedesc'] = 'the issue shortname is displayed on each comment and it can used by configurable reports.';

@@ -45,4 +45,12 @@ $capabilities = array(
             'teacher' => CAP_ALLOW
         )
     ),
+
+    'block/assignment_review:delete' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => array(
+            'manager' => CAP_ALLOW
+        )
+    )
 );

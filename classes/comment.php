@@ -15,17 +15,34 @@
 // along with Assignment Review plugin for Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin version and other meta-data are defined here.
- *
- * @package    block_assignment_review
+* Assignment Review block comment api.
+*
+* @package    block_assignment_review
+* @copyright  2016 onwards Church of England {@link http://www.churchofengland.org/}
+* @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+* @author     Jerome Mouneyrac <jerome@mouneyrac.com>
+*/
+defined('MOODLE_INTERNAL') || die();
+
+require_once($CFG->dirroot . '/comment/lib.php');
+
+/**
+* Comment is helper class to add/delete comments anywhere in moodle
+*
+* @package   block_assignment_review
  * @copyright  2016 onwards Church of England {@link http://www.churchofengland.org/}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author     Jerome Mouneyrac <jerome@mouneyrac.com>
- */
+*/
+class assignment_review_comment extends comment {
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->component = 'block_assignment_review';
-$plugin->version = 2016110310;
-$plugin->requires = 2014111000;
-$plugin->maturity = MATURITY_STABLE;
+    /**
+     * Returns true if the user can delete this comment
+     * @param int $commentid
+     * @return bool
+     */
+    public function can_delete($commentid) {
+        $this->validate(array('commentid'=>$commentid));
+        return has_capability('block/assignment_review:delete', $this->get_context());
+    }
+}

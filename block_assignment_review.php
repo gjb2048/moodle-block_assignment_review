@@ -23,7 +23,7 @@
  * @author     Jerome Mouneyrac <jerome@mouneyrac.com>
  */
 
-require_once($CFG->dirroot . '/comment/lib.php');
+require_once($CFG->dirroot . '/blocks/assignment_review/classes/comment.php');
 require_once($CFG->dirroot . '/blocks/assignment_review/lib.php');
 
 /**
@@ -142,7 +142,7 @@ class block_assignment_review extends block_base {
         $args->notoggle  = true;
         $args->autostart = true;
         $args->displaycancel = false;
-        $comment = new comment($args);
+        $comment = new assignment_review_comment($args);
         $comment->set_view_permission(true);
         $comment->set_fullwidth();
         $this->content->text .= $comment->output(true);
