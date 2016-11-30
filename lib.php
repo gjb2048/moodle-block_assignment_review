@@ -91,7 +91,7 @@ function block_assignment_review_pluginfile($course, $cm, $context, $filearea, $
  * @return boolean
  */
 function block_assignment_review_comment_validate($comment_param) {
-    if ($comment_param->commentarea != 'page_comments') {
+    if ($comment_param->commentarea != 'block_assignment_review_comments') {
         throw new comment_exception('invalidcommentarea');
     }
     if ($comment_param->itemid != 0) {
@@ -124,7 +124,7 @@ function block_assignment_review_comment_permissions($args) {
  * @return boolean
  */
 function block_assignment_review_comment_display($comments, $args) {
-    if ($args->commentarea != 'page_comments') {
+    if ($args->commentarea != 'block_assignment_review_comments') {
         throw new comment_exception('invalidcommentarea');
     }
     if ($args->itemid != 0) {

@@ -135,7 +135,7 @@ class block_assignment_review extends block_base {
         $args = new stdClass;
         $args->context   = $PAGE->context;
         $args->course    = $COURSE;
-        $args->area      = 'page_comments';
+        $args->area      = 'block_assignment_review_comments';
         $args->itemid    = 0;
         $args->component = 'block_assignment_review';
         $args->linktext  = get_string('showcomments');
