@@ -11,3 +11,11 @@
 .block_assignment_review_left {
     text-align: left
 }
+
+.block_assignment_review .comment-list {
+    overflow: visible;
+}
+
+.block_assignment_review .comment-delete {
+    right: -12px;
+}
