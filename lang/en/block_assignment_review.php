@@ -27,12 +27,15 @@
 defined('MOODLE_INTERNAL') || die();
 
 
+$string['blockassignmentdefaulttexts'] = 'Default values';
 $string['blockassignmentissues'] = 'Issues';
 $string['blockassignmentissuesdesc'] = 'Types that a comment can have. For example the reviewers could indicate the issue is "Important" and "remarking required".
 The issue short names will be added to the comment as comment header.';
 $string['blockassignmentmarkers'] = 'Markers';
 $string['blockassignmentmarkersdesc'] = 'These markers would be radio buttons. The short name of the selected marker will be added to the comment as comment header.
 For example you could have: "I am a first grader", "I am an external reviewer"...';
+$string['blockdesc'] = 'Default block description';
+$string['blockname'] = 'Default block name';
 $string['configdescription'] = 'Description';
 $string['configtitle'] = 'Title';
 $string['assignment_review:delete'] = 'Can delete other people assignment review comments';

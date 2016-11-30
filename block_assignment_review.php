@@ -178,11 +178,17 @@ class block_assignment_review extends block_base {
      * The function is called immediatly after init().
      */
     public function specialization() {
+        global $CFG;
 
         // Load user defined title and make sure it's never empty.
         // config_title is defined in the edit_form.php file.
         if (empty($this->config->title)) {
-            $this->title = get_string('pluginname', 'block_assignment_review');
+            if (empty($CFG->blockassignmentblockname)) {
+                $this->title = get_string('pluginname', 'block_assignment_review');
+            } else {
+                // If no title but a default is set in the administration page.
+                $this->title = $CFG->blockassignmentblockname;
+            }
         } else {
             $this->title = $this->config->title;
         }

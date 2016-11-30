@@ -37,16 +37,23 @@ class block_assignment_review_edit_form extends block_edit_form {
      * Extends the configuration form for block_assignment_review.
      */
     protected function specific_definition($mform) {
+        global $CFG;
 
         // Section header title.
         $mform->addElement('header', 'configheader', get_string('blocksettings', 'block'));
 
         $mform->addElement('text', 'config_title', get_string('configtitle', 'block_assignment_review'));
         $mform->setType('config_title', PARAM_TEXT);
+        if (!empty($CFG->blockassignmentblockname)) {
+            $mform->setDefault('config_title', $CFG->blockassignmentblockname);
+        }
 
         $mform->addElement('editor', 'config_description',
             get_string('configdescription', 'block_assignment_review'), array('rows' => 4));
         $mform->setType('config_description', PARAM_RAW);
+        if (!empty($CFG->blockassignmentblockdesc)) {
+            $mform->setDefault('config_description', array('text' => $CFG->blockassignmentblockdesc, 'format' => FORMAT_HTML));
+        }
 
         // Please keep in mind that all elements defined here must start with 'config_'.
 

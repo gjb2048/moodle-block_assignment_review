@@ -73,4 +73,13 @@ if ($ADMIN->fulltree) {
         $settings->add(new admin_setting_heading('blockassignmentissue'.$i, '', '<br/>', ''));
     }
 
+    $settings->add(new admin_setting_heading('blockassignmentdefaulttexts',
+        new lang_string('blockassignmentdefaulttexts', 'block_assignment_review'), '', ''));
+
+    $settings->add(new admin_setting_configtext('blockassignmentblockname', get_string('blockname', 'block_assignment_review'),
+        '', '', PARAM_TEXT));
+
+    $settings->add(new admin_setting_confightmleditor('blockassignmentblockdesc', get_string('blockdesc', 'block_assignment_review'),
+        '', '', PARAM_RAW));
+
 }
