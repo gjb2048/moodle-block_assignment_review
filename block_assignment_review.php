@@ -83,6 +83,10 @@ class block_assignment_review extends block_base {
 
         if (empty($this->config->description['text'])) {
             $desc = '';
+            // if ever the block settings has never been saved and some default desc exist, then display it.
+            if(!isset($this->config->description) && !empty($CFG->blockassignmentblockdesc)) {
+                $desc = $CFG->blockassignmentblockdesc;
+            }
         } else {
             $desc = $this->config->description['text'];
         }
