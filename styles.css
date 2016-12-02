@@ -5,11 +5,15 @@
 
 .block_assignment_review_issues {
     margin-bottom: 20px;
-    text-align: right;
+    text-align: left;
 }
 
 .block_assignment_review_left {
     text-align: left
+}
+
+.block_assignment_review_right { 
+    text-align: right;
 }
 
 .block_assignment_review .comment-list {
