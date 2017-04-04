@@ -27,8 +27,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['assignment_review:addinstance'] = 'Add instance';
-$string['assignment_review:view'] = 'View block';
-$string['assignment_review:delete'] = 'Delete block';
+$string['assignment_review:delete'] = 'Can delete other people assignment review comments';
+$string['assignment_review:view'] = 'Can view the assignment review comments';
 $string['blockassignmentdefaulttexts'] = 'Default values';
 $string['blockassignmentissues'] = 'Issues';
 $string['blockassignmentissuesdesc'] = 'Types that a comment can have. For example the reviewers could indicate the issue is "Important" and "remarking required".
@@ -40,8 +40,6 @@ $string['blockdesc'] = 'Default block description';
 $string['blockname'] = 'Default block name';
 $string['configdescription'] = 'Description';
 $string['configtitle'] = 'Title';
-$string['assignment_review:delete'] = 'Can delete other people assignment review comments';
-$string['assignment_review:view'] = 'Can view the assignment review comments';
 $string['issueshortname'] = 'Issue short name';
 $string['issueshortnamedesc'] = 'the issue shortname is displayed on each comment and it can used by configurable reports.';
 $string['issuetext'] = 'Issue';
