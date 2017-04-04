@@ -26,7 +26,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-
+$string['block/assignment_review:addinstance'] = 'Add instance';
+$string['block/assignment_review:view'] = 'View block';
+$string['block/assignment_review:delete'] = 'Delete block';
 $string['blockassignmentdefaulttexts'] = 'Default values';
 $string['blockassignmentissues'] = 'Issues';
 $string['blockassignmentissuesdesc'] = 'Types that a comment can have. For example the reviewers could indicate the issue is "Important" and "remarking required".
