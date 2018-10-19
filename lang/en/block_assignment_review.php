@@ -53,3 +53,4 @@ $string['markertextdesc'] = 'explicit marker description';
 $string['markertotal'] = 'Number of markers';
 $string['markertotaldesc'] = 'If you need more markers, change this value and press Save. More markers will be added.';
 $string['pluginname'] = 'Assignment Review';
+$string['privacy:metadata:commentpurpose'] = 'Records the comments left in the block';
