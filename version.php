@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_assignment_review';
-$plugin->version = 2016110310;
+$plugin->version = 2018101902;
 $plugin->requires = 2014111000;
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.0.0';
+$plugin->release = '1.1';

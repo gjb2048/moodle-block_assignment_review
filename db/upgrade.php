@@ -45,6 +45,12 @@ function xmldb_block_assignment_review_upgrade($oldversion) {
     // You will also have to create the db/install.xml file by using the XMLDB Editor.
     // Documentation for the XMLDB Editor can be found at:
     // https://docs.moodle.org/dev/XMLDB_editor
+    
+    if ($oldversion < 2018101902) {
+        // Copy the default block title/desc in the default block title/desc for assignment pages.
+        set_config('blockassignmentblocknameinassign', get_config('moodle', 'blockassignmentblockname'));
+        set_config('blockassignmentblockdescinassign', get_config('moodle', 'blockassignmentblockdesc'));
+    }
 
 
     return true;
