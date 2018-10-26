@@ -41,7 +41,7 @@ class block_assignment_review extends block_base {
      */
     public function init() {
        
-        // $this->title = get_string('pluginname', 'block_assignment_review');
+         $this->title = get_string('pluginname', 'block_assignment_review');
        
     }
 
