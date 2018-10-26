@@ -26,6 +26,11 @@
 defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
+    
+    'block/assignment_review:myaddinstance' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+    ),
 
     'block/assignment_review:addinstance' => array(
         'captype' => 'write',

@@ -81,5 +81,11 @@ if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_confightmleditor('blockassignmentblockdesc', get_string('blockdesc', 'block_assignment_review'),
         '', '', PARAM_RAW));
+        
+    $settings->add(new admin_setting_configtext('blockassignmentblocknameinassign', get_string('blocknameinassign', 'block_assignment_review'),
+        '', '', PARAM_TEXT));
+
+    $settings->add(new admin_setting_confightmleditor('blockassignmentblockdescinassign', get_string('blockdescinassign', 'block_assignment_review'),
+        '', '', PARAM_RAW));
 
 }

@@ -40,8 +40,9 @@ class block_assignment_review extends block_base {
      * Initializes class member variables.
      */
     public function init() {
-        // Needed by Moodle to differentiate between blocks.
-        $this->title = get_string('pluginname', 'block_assignment_review');
+       
+        // $this->title = get_string('pluginname', 'block_assignment_review');
+       
     }
 
     /**
@@ -51,8 +52,20 @@ class block_assignment_review extends block_base {
      */
     public function get_content() {
         global $PAGE, $COURSE, $CFG;
-
-
+        
+        if (strpos($PAGE->url, '/mod/assign/') !== false) {
+          
+             $this->title = $this->config->titleinassign;
+        } else {
+        
+            // Edge case - somehow config is not set at this moment for getting title
+            // when no config has been recorded in the block settings for the default title.
+            if (empty($this->config)) {
+                $this->title = $CFG->blockassignmentblockname;
+            } else {
+                $this->title = $this->config->title;
+            }
+        }
 
         if (!has_capability('block/assignment_review:view', $PAGE->context)) {
             return $this->content;
@@ -85,10 +98,18 @@ class block_assignment_review extends block_base {
             $desc = '';
             // if ever the block settings has never been saved and some default desc exist, then display it.
             if(!isset($this->config->description) && !empty($CFG->blockassignmentblockdesc)) {
-                $desc = $CFG->blockassignmentblockdesc;
+                if (strpos($PAGE->url, '/mod/assign/') !== false) {
+                    $desc = $CFG->blockassignmentblockdescinassign;
+                } else {
+                    $desc = $CFG->blockassignmentblockdesc;
+                }
             }
         } else {
-            $desc = $this->config->description['text'];
+            if (strpos($PAGE->url, '/mod/assign/') !== false) {
+                $desc = $this->config->descriptioninassign['text'];
+            } else {
+                $desc = $this->config->description['text'];
+            }
         }
 
         // Description
@@ -132,7 +153,7 @@ class block_assignment_review extends block_base {
             'comments',
             'commentscount',
             'commentsrequirelogin',
-            'deletecomment',
+            // 'deletecomment',
             ),
             'moodle'
         );

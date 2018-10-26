@@ -37,9 +37,13 @@ $string['blockassignmentmarkers'] = 'Markers';
 $string['blockassignmentmarkersdesc'] = 'These markers would be radio buttons. The short name of the selected marker will be added to the comment as comment header.
 For example you could have: "I am a first grader", "I am an external reviewer"...';
 $string['blockdesc'] = 'Default block description';
+$string['blockdescinassign'] = 'Default block description on assignment pages';
 $string['blockname'] = 'Default block name';
+$string['blocknameinassign'] = 'Default block name on assignment pages';
 $string['configdescription'] = 'Description';
+$string['configdescriptioninassign'] = 'Description on assignment pages';
 $string['configtitle'] = 'Title';
+$string['configtitleinassign'] = 'Title on assignment pages';
 $string['issueshortname'] = 'Issue short name';
 $string['issueshortnamedesc'] = 'the issue shortname is displayed on each comment and it can used by configurable reports.';
 $string['issuetext'] = 'Issue';
