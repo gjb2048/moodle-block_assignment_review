@@ -51,23 +51,21 @@ class block_assignment_review extends block_base {
      * @return stdClass The block contents.
      */
     public function get_content() {
-        global $PAGE, $COURSE, $CFG;
-        
-        if (strpos($PAGE->url, '/mod/assign/') !== false) {
-          
-             $this->title = $this->config->titleinassign;
+        global $COURSE, $CFG;
+
+        // Edge case - somehow config is not set at this moment for getting title
+        // when no config has been recorded in the block settings for the default title.
+        if (empty($this->config)) {
+            $this->title = $CFG->blockassignmentblockname;
         } else {
-        
-            // Edge case - somehow config is not set at this moment for getting title
-            // when no config has been recorded in the block settings for the default title.
-            if (empty($this->config)) {
-                $this->title = $CFG->blockassignmentblockname;
+            if (strpos($this->page->url, '/mod/assign/') !== false) {
+                $this->title = $this->config->titleinassign;
             } else {
                 $this->title = $this->config->title;
             }
         }
 
-        if (!has_capability('block/assignment_review:view', $PAGE->context)) {
+        if (!has_capability('block/assignment_review:view', $this->page->context)) {
             return $this->content;
         }
 
@@ -98,14 +96,14 @@ class block_assignment_review extends block_base {
             $desc = '';
             // if ever the block settings has never been saved and some default desc exist, then display it.
             if(!isset($this->config->description) && !empty($CFG->blockassignmentblockdesc)) {
-                if (strpos($PAGE->url, '/mod/assign/') !== false) {
+                if (strpos($this->page->url, '/mod/assign/') !== false) {
                     $desc = $CFG->blockassignmentblockdescinassign;
                 } else {
                     $desc = $CFG->blockassignmentblockdesc;
                 }
             }
         } else {
-            if (strpos($PAGE->url, '/mod/assign/') !== false) {
+            if (strpos($this->page->url, '/mod/assign/') !== false) {
                 $desc = $this->config->descriptioninassign['text'];
             } else {
                 $desc = $this->config->description['text'];
@@ -147,7 +145,7 @@ class block_assignment_review extends block_base {
 
 
         // Comments
-        $PAGE->requires->strings_for_js(
+        $this->page->requires->strings_for_js(
             array(
             'addcomment',
             'comments',
@@ -158,7 +156,7 @@ class block_assignment_review extends block_base {
             'moodle'
         );
         $args = new stdClass;
-        $args->context   = $PAGE->context;
+        $args->context   = $this->page->context;
         $args->course    = $COURSE;
         $args->area      = 'block_assignment_review_comments';
         $args->itemid    = 0;
@@ -191,8 +189,8 @@ class block_assignment_review extends block_base {
         $this->content->text .= '</form>';
 
         // Load jquery.
-        $PAGE->requires->jquery();
-        $PAGE->requires->js('/blocks/assignment_review/script.js');
+        $this->page->requires->jquery();
+        $this->page->requires->js('/blocks/assignment_review/script.js');
 
         return $this->content;
     }
