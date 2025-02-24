@@ -50,6 +50,8 @@ function xmldb_block_assignment_review_upgrade($oldversion) {
         // Copy the default block title/desc in the default block title/desc for assignment pages.
         set_config('blockassignmentblocknameinassign', get_config('moodle', 'blockassignmentblockname'));
         set_config('blockassignmentblockdescinassign', get_config('moodle', 'blockassignmentblockdesc'));
+
+        upgrade_plugin_savepoint(true, 2018101902, 'block', 'assignment_review');
     }
 
     return true;
