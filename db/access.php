@@ -25,37 +25,37 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
-    
-    'block/assignment_review:myaddinstance' => array(
+$capabilities = [
+
+    'block/assignment_review:myaddinstance' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-    ),
+    ],
 
-    'block/assignment_review:addinstance' => array(
+    'block/assignment_review:addinstance' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array(
-            'manager' => CAP_ALLOW
-        )
-    ),
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+        ],
+    ],
 
-    'block/assignment_review:view' => array(
+    'block/assignment_review:view' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array(
+        'archetypes' => [
             'manager' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'coursecreator' => CAP_ALLOW,
-            'teacher' => CAP_ALLOW
-        )
-    ),
+            'teacher' => CAP_ALLOW,
+        ],
+    ],
 
-    'block/assignment_review:delete' => array(
+    'block/assignment_review:delete' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array(
-            'manager' => CAP_ALLOW
-        )
-    )
-);
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+        ],
+    ],
+];

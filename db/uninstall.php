@@ -24,8 +24,6 @@
  * @author     Jerome Mouneyrac <jerome@mouneyrac.com>
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Custom uninstallation procedure.
  */

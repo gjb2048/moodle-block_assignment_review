@@ -49,12 +49,12 @@ class block_assignment_review_edit_form extends block_edit_form {
         }
 
         $mform->addElement('editor', 'config_description',
-            get_string('configdescription', 'block_assignment_review'), array('rows' => 4));
+            get_string('configdescription', 'block_assignment_review'), ['rows' => 4]);
         $mform->setType('config_description', PARAM_RAW);
         if (!empty($CFG->blockassignmentblockdesc)) {
-            $mform->setDefault('config_description', array('text' => $CFG->blockassignmentblockdesc, 'format' => FORMAT_HTML));
+            $mform->setDefault('config_description', ['text' => $CFG->blockassignmentblockdesc, 'format' => FORMAT_HTML]);
         }
-        
+
         $mform->addElement('text', 'config_titleinassign', get_string('configtitleinassign', 'block_assignment_review'));
         $mform->setType('config_titleinassign', PARAM_TEXT);
         if (!empty($CFG->blockassignmentblocknameinassign)) {
@@ -62,10 +62,11 @@ class block_assignment_review_edit_form extends block_edit_form {
         }
 
         $mform->addElement('editor', 'config_descriptioninassign',
-            get_string('configdescriptioninassign', 'block_assignment_review'), array('rows' => 4));
+            get_string('configdescriptioninassign', 'block_assignment_review'), ['rows' => 4]);
         $mform->setType('config_descriptioninassign', PARAM_RAW);
         if (!empty($CFG->blockassignmentblockdescinassign)) {
-            $mform->setDefault('config_descriptioninassign', array('text' => $CFG->blockassignmentblockdescinassign, 'format' => FORMAT_HTML));
+            $mform->setDefault('config_descriptioninassign',
+                ['text' => $CFG->blockassignmentblockdescinassign, 'format' => FORMAT_HTML]);
         }
 
         // Please keep in mind that all elements defined here must start with 'config_'.

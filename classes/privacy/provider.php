@@ -25,8 +25,6 @@
 
 namespace block_assignment_review\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 use context;
 use core_privacy\local\metadata\collection;
 use core_privacy\local\request\contextlist;
@@ -53,7 +51,7 @@ class provider implements
      * @param  collection $collection A list of information to add to.
      * @return collection Return the collection after adding to it.
      */
-    public static function _get_metadata(collection $collection) {
+    public static function get_metadata(collection $collection) : collection {
         $collection->link_subsystem('core_comment', 'privacy:metadata:commentpurpose');
         return $collection;
     }
@@ -64,7 +62,7 @@ class provider implements
      * @param int $userid The user to search.
      * @return contextlist $contextlist The contextlist containing the list of contexts used in this plugin.
      */
-    public static function _get_contexts_for_userid($userid) {
+    public static function get_contexts_for_userid($userid) : contextlist {
         $sql = "SELECT DISTINCT c.contextid
                   FROM {comments} c
                  WHERE c.userid = :userid
@@ -77,7 +75,6 @@ class provider implements
         $contextlist = new contextlist();
         $contextlist->add_from_sql($sql, $params);
 
-
         return $contextlist;
     }
 
@@ -86,7 +83,7 @@ class provider implements
      *
      * @param approved_contextlist $contextlist The approved contexts to export information for.
      */
-    public static function _export_user_data(approved_contextlist $contextlist) {
+    public static function export_user_data(approved_contextlist $contextlist) {
         $pluginname = get_string('pluginname', 'block_assignment_review');
         $contexts = $contextlist->get_contexts();
         foreach ($contexts as $context) {
@@ -106,7 +103,7 @@ class provider implements
      *
      * @param context $context The specific context to delete data for.
      */
-    public static function _delete_data_for_all_users_in_context(context $context) {
+    public static function delete_data_for_all_users_in_context(context $context) {
         comments_provider::delete_comments_for_all_users(
             $context,
             'block_assignment_review',
@@ -119,7 +116,7 @@ class provider implements
      *
      * @param approved_contextlist $contextlist The approved contexts and user information to delete information for.
      */
-    public static function _delete_data_for_user(approved_contextlist $contextlist) {
+    public static function delete_data_for_user(approved_contextlist $contextlist) {
         comments_provider::delete_comments_for_user(
             $contextlist,
             'block_assignment_review',

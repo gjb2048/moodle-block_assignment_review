@@ -42,10 +42,12 @@ if ($ADMIN->fulltree) {
         $markertotal = $CFG->blockassignmentmarkertotal;
     }
 
-    for ($i=0; $i < $markertotal; $i++) {
-        $settings->add(new admin_setting_configtext('blockassignmentmarkershortname'.$i, get_string('markershortname', 'block_assignment_review'),
+    for ($i = 0; $i < $markertotal; $i++) {
+        $settings->add(new admin_setting_configtext('blockassignmentmarkershortname'.$i,
+            get_string('markershortname', 'block_assignment_review'),
             get_string('markershortnamedesc', 'block_assignment_review'), '', PARAM_TEXT));
-        $settings->add(new admin_setting_configtext('blockassignmentmarkertext'.$i, get_string('markertext', 'block_assignment_review'),
+        $settings->add(new admin_setting_configtext('blockassignmentmarkertext'.$i,
+            get_string('markertext', 'block_assignment_review'),
             get_string('markertextdesc', 'block_assignment_review'), '', PARAM_TEXT));
 
         $settings->add(new admin_setting_heading('blockassignmentmarker'.$i, '', '<br/>', ''));
@@ -64,10 +66,12 @@ if ($ADMIN->fulltree) {
         $issuetotal = $CFG->blockassignmentissuetotal;
     }
 
-    for ($i=0; $i < $issuetotal; $i++) {
-        $settings->add(new admin_setting_configtext('blockassignmentissueshortname'.$i, get_string('issueshortname', 'block_assignment_review'),
+    for ($i = 0; $i < $issuetotal; $i++) {
+        $settings->add(new admin_setting_configtext('blockassignmentissueshortname'.$i,
+            get_string('issueshortname', 'block_assignment_review'),
             get_string('issueshortnamedesc', 'block_assignment_review'), '', PARAM_TEXT));
-        $settings->add(new admin_setting_configtext('blockassignmentissuetext'.$i, get_string('issuetext', 'block_assignment_review'),
+        $settings->add(new admin_setting_configtext('blockassignmentissuetext'.$i,
+            get_string('issuetext', 'block_assignment_review'),
             get_string('issuetextdesc', 'block_assignment_review'), '', PARAM_TEXT));
 
         $settings->add(new admin_setting_heading('blockassignmentissue'.$i, '', '<br/>', ''));
@@ -76,16 +80,16 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_heading('blockassignmentdefaulttexts',
         new lang_string('blockassignmentdefaulttexts', 'block_assignment_review'), '', ''));
 
-    $settings->add(new admin_setting_configtext('blockassignmentblockname', get_string('blockname', 'block_assignment_review'),
-        '', '', PARAM_TEXT));
+    $settings->add(new admin_setting_configtext('blockassignmentblockname',
+        get_string('blockname', 'block_assignment_review'), '', '', PARAM_TEXT));
 
-    $settings->add(new admin_setting_confightmleditor('blockassignmentblockdesc', get_string('blockdesc', 'block_assignment_review'),
-        '', '', PARAM_RAW));
-        
-    $settings->add(new admin_setting_configtext('blockassignmentblocknameinassign', get_string('blocknameinassign', 'block_assignment_review'),
-        '', '', PARAM_TEXT));
+    $settings->add(new admin_setting_confightmleditor('blockassignmentblockdesc',
+        get_string('blockdesc', 'block_assignment_review'), '', '', PARAM_RAW));
 
-    $settings->add(new admin_setting_confightmleditor('blockassignmentblockdescinassign', get_string('blockdescinassign', 'block_assignment_review'),
-        '', '', PARAM_RAW));
+    $settings->add(new admin_setting_configtext('blockassignmentblocknameinassign',
+        get_string('blocknameinassign', 'block_assignment_review'), '', '', PARAM_TEXT));
+
+    $settings->add(new admin_setting_confightmleditor('blockassignmentblockdescinassign',
+        get_string('blockdescinassign', 'block_assignment_review'), '', '', PARAM_RAW));
 
 }

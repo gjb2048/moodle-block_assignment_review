@@ -23,6 +23,8 @@
  * @author     Jerome Mouneyrac <jerome@mouneyrac.com>
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 require_once($CFG->dirroot . '/blocks/assignment_review/classes/comment.php');
 require_once($CFG->dirroot . '/blocks/assignment_review/lib.php');
 
@@ -40,9 +42,9 @@ class block_assignment_review extends block_base {
      * Initializes class member variables.
      */
     public function init() {
-       
+
          $this->title = get_string('pluginname', 'block_assignment_review');
-       
+
     }
 
     /**
@@ -53,8 +55,8 @@ class block_assignment_review extends block_base {
     public function get_content() {
         global $COURSE, $CFG;
 
-        // Edge case - somehow config is not set at this moment for getting title
-        // when no config has been recorded in the block settings for the default title.
+        /* Edge case - somehow config is not set at this moment for getting title
+           when no config has been recorded in the block settings for the default title. */
         if (empty($this->config)) {
             $this->title = $CFG->blockassignmentblockname;
         } else {
@@ -88,14 +90,14 @@ class block_assignment_review extends block_base {
         }
 
         $this->content = new stdClass();
-        $this->content->items = array();
-        $this->content->icons = array();
+        $this->content->items = [];
+        $this->content->icons = [];
         $this->content->footer = '';
 
         if (empty($this->config->description['text'])) {
             $desc = '';
-            // if ever the block settings has never been saved and some default desc exist, then display it.
-            if(!isset($this->config->description) && !empty($CFG->blockassignmentblockdesc)) {
+            // If ever the block settings has never been saved and some default desc exist, then display it.
+            if (!isset($this->config->description) && !empty($CFG->blockassignmentblockdesc)) {
                 if (strpos($this->page->url, '/mod/assign/') !== false) {
                     $desc = $CFG->blockassignmentblockdescinassign;
                 } else {
@@ -110,10 +112,10 @@ class block_assignment_review extends block_base {
             }
         }
 
-        // Description
+        // Description.
         $this->content->text = $desc;
 
-        // Markers
+        // Markers.
         $usermarker = get_user_preferences('block_assignment_review_marker');
         if (empty($usermarker)) {
             $usermarker = '';
@@ -130,29 +132,28 @@ class block_assignment_review extends block_base {
             $configshortname = 'blockassignmentmarkershortname' . $i;
             if (!empty($CFG->{$configname}) && !empty($CFG->{$configshortname})) {
 
-//                $selected = '';
-//                if (empty($selected) &&
-//                    ($usermarker === $CFG->{$configshortname} || $i === $markertotal - 1)) {
-//                    $selected = "checked=\"checked\"";
-//                }
+                /* $selected = '';
+                   if (empty($selected) &&
+                   ($usermarker === $CFG->{$configshortname} || $i === $markertotal - 1)) {
+                     $selected = "checked=\"checked\"";
+                   } */
 
                 $this->content->text .=
-                    '<input type="radio" name="blockassignmentmarker" 
-                        value="'.$CFG->{$configshortname}.'" > ' . $CFG->{$configname} . '</input><br/>';
+                    '<input type="radio" name="blockassignmentmarker" value="'.$CFG->{$configshortname}.'" > ' .
+                        $CFG->{$configname} . '</input><br/>';
             }
         }
         $this->content->text .= '</form>';
 
-
-        // Comments
+        // Comments.
         $this->page->requires->strings_for_js(
-            array(
+            [
             'addcomment',
             'comments',
             'commentscount',
             'commentsrequirelogin',
-            // 'deletecomment',
-            ),
+            // If needed 'deletecomment',?
+            ],
             'moodle'
         );
         $args = new stdClass;
@@ -170,7 +171,7 @@ class block_assignment_review extends block_base {
         $comment->set_fullwidth();
         $this->content->text .= $comment->output(true);
 
-        // Issues
+        // Issues.
         if (empty($CFG->blockassignmentissuetotal)) {
             $issuetotal = DEFAULT_NUMBER_OF_MARKERS;
         } else {
@@ -181,9 +182,8 @@ class block_assignment_review extends block_base {
             $configname = 'blockassignmentissuetext' . $i;
             $configshortname = 'blockassignmentissueshortname' . $i;
             if (!empty($CFG->{$configname})) {
-                $this->content->text .=
-                    '<input type="checkbox" name="blockassignmentissues" 
-                    value="'.$CFG->{$configshortname}.'"> ' . $CFG->{$configname} . '</input><br/>';
+                $this->content->text .= '<input type="checkbox" name="blockassignmentissues" value="' .
+                    $CFG->{$configshortname}.'"> ' . $CFG->{$configname} . '</input><br/>';
             }
         }
         $this->content->text .= '</form>';
@@ -232,6 +232,6 @@ class block_assignment_review extends block_base {
      * @return string[] Array of pages and permissions.
      */
     public function applicable_formats() {
-        return array('all' => true);
+        return ['all' => true];
     }
 }

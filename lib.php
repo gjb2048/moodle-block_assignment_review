@@ -37,19 +37,19 @@ define('DEFAULT_NUMBER_OF_MARKERS', 4);
  * @param array $options
  * @return bool
  */
-function block_assignment_review_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+function block_assignment_review_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
 
-    // Make sure the filearea starts with block_assignment_review
+    // Make sure the filearea starts with block_assignment_review.
     if ( strpos($filearea, 'block_assignment_review') !== 0 ) {
         return false;
     }
 
     require_capability('block/assignment_review:view', context_course::instance($course->id));
 
-    // change the context to system for block_assignment_review now that we check the user has view permission on the current guide.
-//    if ($filearea == 'block_assignment_review') {
-//        $context = context_system::instance();
-//    }
+    /* Change the context to system for block_assignment_review now that we check the user has view permission on the current guide.
+        if ($filearea == 'block_assignment_review') {
+            $context = context_system::instance();
+        } */
 
     // Leave this line out if you set the itemid to null in make_pluginfile_url (set $itemid to 0 instead).
     $itemid = array_shift($args); // The first item in the $args array.
@@ -57,9 +57,9 @@ function block_assignment_review_pluginfile($course, $cm, $context, $filearea, $
     // Extract the filename / filepath from the $args array.
     $filename = array_pop($args); // The last item in the $args array.
     if (!$args) {
-        $filepath = '/'; // $args is empty => the path is '/'
+        $filepath = '/'; // If $args is empty => the path is '/'.
     } else {
-        $filepath = '/' . implode('/', $args) . '/'; // $args contains elements of the filepath
+        $filepath = '/' . implode('/', $args) . '/'; // If $args contains elements of the filepath.
     }
 
     // Retrieve the file from the Files API.
@@ -90,11 +90,11 @@ function block_assignment_review_pluginfile($course, $cm, $context, $filearea, $
  * }
  * @return boolean
  */
-function block_assignment_review_comment_validate($comment_param) {
-    if ($comment_param->commentarea != 'block_assignment_review_comments') {
+function block_assignment_review_comment_validate($commentparam) {
+    if ($commentparam->commentarea != 'block_assignment_review_comments') {
         throw new comment_exception('invalidcommentarea');
     }
-    if ($comment_param->itemid != 0) {
+    if ($commentparam->itemid != 0) {
         throw new comment_exception('invalidcommentitemid');
     }
     return true;
@@ -110,7 +110,7 @@ function block_assignment_review_comment_validate($comment_param) {
  * @return array
  */
 function block_assignment_review_comment_permissions($args) {
-    return array('post'=>true, 'view'=>true);
+    return ['post' => true, 'view' => true];
 }
 
 /**

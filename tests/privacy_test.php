@@ -24,11 +24,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-global $CFG, $DB;
+namespace block_assignment_review;
 
-require_once($CFG->dirroot . '/comment/lib.php');
-
+use context_course;
+use context_module;
+use context_system;
 use core_privacy\tests\provider_testcase;
 use core_privacy\local\metadata\collection;
 use core_privacy\local\metadata\types\subsystem_link;
@@ -36,6 +36,12 @@ use core_privacy\local\request\approved_contextlist;
 use core_privacy\local\request\transform;
 use core_privacy\local\request\writer;
 use block_assignment_review\privacy\provider;
+use stdClass;
+
+defined('MOODLE_INTERNAL') || die();
+global $CFG, $DB;
+
+require_once($CFG->dirroot . '/comment/lib.php');
 
 /**
  * Data provider testcase class.
@@ -46,15 +52,7 @@ use block_assignment_review\privacy\provider;
  * @author     Frédéric Massart <fred@branchup.tech>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_assignment_review_privacy_testcase extends provider_testcase {
-
-    /**
-     * Setup.
-     */
-    public function setUp() {
-        parent::setUp();
-        $this->resetAfterTest();
-    }
+class privacy_test extends provider_testcase {
 
     /**
      * Convenience method for creating comments.
@@ -66,7 +64,8 @@ class block_assignment_review_privacy_testcase extends provider_testcase {
      * @return object The comment.
      */
     protected function create_comment($context, $message) {
-        global $SITE;
+        global $CFG, $SITE;
+        require_once($CFG->dirroot . '/comment/lib.php');
 
         $course = null;
         $coursecontext = $context->get_course_context(false);
@@ -87,7 +86,7 @@ class block_assignment_review_privacy_testcase extends provider_testcase {
         $args->autostart = true;
         $args->displaycancel = false;
 
-        $comment = new comment($args);
+        $comment = new \comment($args);
         $comment->set_post_permission(true);
         $comment->set_fullwidth();
         $comment->add($message);
@@ -111,6 +110,7 @@ class block_assignment_review_privacy_testcase extends provider_testcase {
      * Test get content for user ID.
      */
     public function test_get_contexts_for_userid() {
+        $this->resetAfterTest();
         $dg = $this->getDataGenerator();
 
         $c1 = $dg->create_course();
@@ -153,6 +153,7 @@ class block_assignment_review_privacy_testcase extends provider_testcase {
     }
 
     public function test_export_data_for_user() {
+        $this->resetAfterTest();
         $dg = $this->getDataGenerator();
 
         $c1 = $dg->create_course();
@@ -198,7 +199,7 @@ class block_assignment_review_privacy_testcase extends provider_testcase {
         $this->assertContains('Test course 1 - b', array_map($getmessage, $data->comments));
         $data = writer::with_context($cm2actx)->get_data($path);
         $this->assertCount(1, $data->comments);
-        $this->assertContains('Test cm 2', $data->comments[0]->content);
+        $this->assertEquals('Test cm 2', $data->comments[0]->content);
 
         $data = writer::with_context($sysctx)->get_data($path);
         $this->assertEmpty($data);
@@ -217,7 +218,7 @@ class block_assignment_review_privacy_testcase extends provider_testcase {
         $this->assertEquals('Test2 course 2', $data->comments[0]->content);
         $data = writer::with_context($cm1actx)->get_data($path);
         $this->assertCount(1, $data->comments);
-        $this->assertContains('Test2 cm 1a', $data->comments[0]->content);
+        $this->assertEquals('Test2 cm 1a', $data->comments[0]->content);
 
         $data = writer::with_context($sysctx)->get_data($path);
         $this->assertEmpty($data);
@@ -246,6 +247,7 @@ class block_assignment_review_privacy_testcase extends provider_testcase {
 
     public function test_delete_data_for_user() {
         global $DB;
+        $this->resetAfterTest();
         $dg = $this->getDataGenerator();
 
         $c1 = $dg->create_course();
@@ -292,6 +294,7 @@ class block_assignment_review_privacy_testcase extends provider_testcase {
 
     public function test_delete_data_for_all_users_in_context() {
         global $DB;
+        $this->resetAfterTest();
         $dg = $this->getDataGenerator();
 
         $c1 = $dg->create_course();
@@ -358,5 +361,4 @@ class block_assignment_review_privacy_testcase extends provider_testcase {
         sort($expectedids);
         $this->assertEquals($expectedids, $contextids);
     }
-
 }
