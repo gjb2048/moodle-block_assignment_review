@@ -56,7 +56,8 @@ class block_assignment_review extends block_base {
         global $COURSE, $CFG, $args;
 
         if (($this->page->pagetype == "mod-assign-grader") ||
-            ((!empty($args['callback'])) && ($args['callback'] == "gradingpanel"))) { // Args is for AJAX request.
+            ((!empty($args)) && (is_array($args)) &&
+             (!empty($args['callback'])) && ($args['callback'] == "gradingpanel"))) { // Args is for AJAX request.
             return ""; // Do not output such that the comments '#cmt-tmpl' will be on the page for commenting.
         }
 
