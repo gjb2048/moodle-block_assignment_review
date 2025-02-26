@@ -53,7 +53,12 @@ class block_assignment_review extends block_base {
      * @return stdClass The block contents.
      */
     public function get_content() {
-        global $COURSE, $CFG;
+        global $COURSE, $CFG, $args;
+
+        if (($this->page->pagetype == "mod-assign-grader") ||
+            ((!empty($args['callback'])) && ($args['callback'] == "gradingpanel"))) { // Args is for AJAX request.
+            return ""; // Do not output such that the comments '#cmt-tmpl' will be on the page for commenting.
+        }
 
         /* Edge case - somehow config is not set at this moment for getting title
            when no config has been recorded in the block settings for the default title. */
