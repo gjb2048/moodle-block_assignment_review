@@ -51,7 +51,7 @@ class provider implements
      * @param  collection $collection A list of information to add to.
      * @return collection Return the collection after adding to it.
      */
-    public static function get_metadata(collection $collection) : collection {
+    public static function get_metadata(collection $collection): collection {
         $collection->link_subsystem('core_comment', 'privacy:metadata:commentpurpose');
         return $collection;
     }
@@ -62,7 +62,7 @@ class provider implements
      * @param int $userid The user to search.
      * @return contextlist $contextlist The contextlist containing the list of contexts used in this plugin.
      */
-    public static function get_contexts_for_userid($userid) : contextlist {
+    public static function get_contexts_for_userid($userid): contextlist {
         $sql = "SELECT DISTINCT c.contextid
                   FROM {comments} c
                  WHERE c.userid = :userid

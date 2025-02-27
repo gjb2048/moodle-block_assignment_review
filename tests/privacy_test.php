@@ -52,7 +52,7 @@ require_once($CFG->dirroot . '/comment/lib.php');
  * @author     Frédéric Massart <fred@branchup.tech>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class privacy_test extends provider_testcase {
+final class privacy_test extends provider_testcase {
 
     /**
      * Convenience method for creating comments.
@@ -97,7 +97,7 @@ class privacy_test extends provider_testcase {
     /**
      * Test get meta data.
      */
-    public function test_get_metadata() {
+    public function test_get_metadata(): void {
         $collection = new collection('block_assignment_review');
         $collection = provider::get_metadata($collection);
         $items = $collection->get_collection();
@@ -109,7 +109,7 @@ class privacy_test extends provider_testcase {
     /**
      * Test get content for user ID.
      */
-    public function test_get_contexts_for_userid() {
+    public function test_get_contexts_for_userid(): void {
         $this->resetAfterTest();
         $dg = $this->getDataGenerator();
 
@@ -245,7 +245,7 @@ class privacy_test extends provider_testcase {
         $this->assertEmpty($data);
     }
 
-    public function test_delete_data_for_user() {
+    public function test_delete_data_for_user(): void {
         global $DB;
         $this->resetAfterTest();
         $dg = $this->getDataGenerator();
@@ -292,7 +292,7 @@ class privacy_test extends provider_testcase {
         $this->assertEquals(3, $DB->count_records('comments', ['userid' => $u2->id]));
     }
 
-    public function test_delete_data_for_all_users_in_context() {
+    public function test_delete_data_for_all_users_in_context(): void {
         global $DB;
         $this->resetAfterTest();
         $dg = $this->getDataGenerator();
