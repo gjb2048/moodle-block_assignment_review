@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['assignment_review:addinstance'] = 'Add instance';
 $string['assignment_review:delete'] = 'Can delete other people assignment review comments';
+$string['assignment_review:myaddinstance'] = 'Add instance';
 $string['assignment_review:view'] = 'Can view the assignment review comments';
 $string['blockassignmentdefaulttexts'] = 'Default values';
 $string['blockassignmentissues'] = 'Issues';
