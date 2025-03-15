@@ -22,6 +22,7 @@
  * @copyright  2016 onwards Church of England {@link http://www.churchofengland.org/}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author     Jerome Mouneyrac <jerome@mouneyrac.com>
+ * @author     G J Barnard - {@link http://moodle.org/user/profile.php?id=442195}
  */
 
 defined('MOODLE_INTERNAL') || die();
@@ -57,5 +58,5 @@ $string['markertext'] = 'Marker';
 $string['markertextdesc'] = 'explicit marker description';
 $string['markertotal'] = 'Number of markers';
 $string['markertotaldesc'] = 'If you need more markers, change this value and press Save. More markers will be added.';
-$string['pluginname'] = 'Assignment Review';
+$string['pluginname'] = 'Assignment review';
 $string['privacy:metadata:commentpurpose'] = 'Records the comments left in the block';
